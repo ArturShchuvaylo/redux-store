@@ -7,7 +7,7 @@ const withPhonesStoreService = () => (Wrapped) => {
             <PhonesStoreServiceConsumer>
                 {
                     (phonesStoreService) => {
-                        <Wrapped {...props} phonesStoreService={phonesStoreService} />
+                        return <Wrapped {...props} phonesStoreService={phonesStoreService} />
                     }
                 }
             </PhonesStoreServiceConsumer>
@@ -16,3 +16,4 @@ const withPhonesStoreService = () => (Wrapped) => {
 }
 
 export default withPhonesStoreService;
+

@@ -1,0 +1,30 @@
+.phone-list-item {
+  display: flex;
+  margin: 15px 0;
+}
+
+.phone-list-item .phone-cover {
+  flex-shrink: 0;
+  width: 120px;
+  margin-right: 30px;
+}
+
+.phone-list-item .phone-cover img {
+  max-width: 100%;
+}
+
+.phone-list-item .phone-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  align-items: flex-start;
+}
+
+.phone-list-item .phone-details .phone-title {
+  font-size: 1.2rem;
+}
+
+.phone-list-item .phone-details .phone-price {
+  font-size: 1.4rem;
+}
