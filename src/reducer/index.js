@@ -3,13 +3,20 @@ const initialState = {
     loading: true,
     error: null,
     cartItems: [
-
-
     ],
-    orderTotal: 2000,
+    orderTotal: 0,
+    countItems: 0,
 };
 
 const updateCartItems = (cartItems, item, idx) => {
+    if (item.count === 0) {
+        return [
+            ...cartItems.slice(0, idx),
+            ...cartItems.slice(idx + 1),
+        ]
+
+
+    }
     if (idx === -1) {
         return [
             ...cartItems,
@@ -27,17 +34,34 @@ const updateCartItems = (cartItems, item, idx) => {
 
 
 }
-const updateCartItem = (phone, item = {}) => {
+const updateCartItem = (phone, item = {}, quantity) => {
 
     const { title = phone.title, total = 0, id = phone.id, count = 0 } = item;
     return {
         title,
-        total: total + phone.total,
-        count: count + 1,
+        total: total + phone.total * quantity,
+        count: count + quantity,
         id,
+    }
+}
+
+const updateOrder = (state, phoneId, quantity) => {
+    const { phones, cartItems } = state;
+    const phone = phones.find((elem) => elem.id === phoneId);
+    const itemIndex = cartItems.findIndex((elem) => elem.id === phoneId);
+    const item = cartItems[itemIndex];
+
+    const newItem = updateCartItem(phone, item, quantity)
+    return {
+        ...state,
+        cartItems: updateCartItems(cartItems, newItem, itemIndex),
+        countItems: state.countItems + quantity,
+        orderTotal: state.orderTotal + phone.total * quantity,
     }
 
 }
+
+
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -63,16 +87,16 @@ const reducer = (state = initialState, action) => {
                 error: action.payload,
             }
         case "PHONE_ADD_TO_CART":
-            const phoneId = action.payload;
-            const phone = state.phones.find((elem) => elem.id === phoneId);
-            const itemIndex = state.cartItems.findIndex((elem) => elem.id === phoneId)
-            const item = state.cartItems[itemIndex];
+            return updateOrder(state, action.payload, +1);
 
-            const newItem = updateCartItem(phone, item)
-            return {
-                ...state,
-                cartItems: updateCartItems(state.cartItems, newItem, itemIndex)
-            }
+        case "PHONE_REMOVE_FROM_CART":
+            return updateOrder(state, action.payload, -1);
+        case "PHONE_DELETE_ALL_CART":
+            const item = state.cartItems.find(({ id }) => id === action.payload)
+            return updateOrder(state, action.payload, -item.count);
+
+
+
         default:
             return state;
     }

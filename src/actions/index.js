@@ -22,6 +22,18 @@ const phoneAddToCart = (id) => {
         payload: id,
     }
 }
+const phoneRemoveFromCart = (id) => {
+    return {
+        type: "PHONE_REMOVE_FROM_CART",
+        payload: id,
+    }
+}
+const phoneDeleteAllCart = (id) => {
+    return {
+        type: "PHONE_DELETE_ALL_CART",
+        payload: id,
+    }
+}
 
 const fetchPhones = (dispatch, phonesStoreService) => () => {
     dispatch(phonesRequested());
@@ -36,5 +48,7 @@ const fetchPhones = (dispatch, phonesStoreService) => () => {
 
 export {
     fetchPhones,
-    phoneAddToCart
+    phoneAddToCart,
+    phoneRemoveFromCart,
+    phoneDeleteAllCart
 }

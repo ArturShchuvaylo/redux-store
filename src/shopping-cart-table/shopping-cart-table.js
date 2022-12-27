@@ -2,9 +2,15 @@ import React from 'react';
 import './shopping-cart-table.css';
 import { connect } from 'react-redux';
 
+import {
+  phoneAddToCart,
+  phoneRemoveFromCart,
+  phoneDeleteAllCart
+} from '../actions';
 
 
-const ShoppingCartTable = ({ items, oredrTotal, onIncrease, onDecrease, onDelete }) => {
+
+const ShoppingCartTable = ({ items, orderTotal, onIncrease, onDecrease, onDelete }) => {
 
   const renderRow = (item, idx) => {
     const { title, total, count, id } = item;
@@ -50,7 +56,7 @@ const ShoppingCartTable = ({ items, oredrTotal, onIncrease, onDecrease, onDelete
       </table>
 
       <div className="total">
-        {oredrTotal}
+        {`  Total:${orderTotal}$`}
       </div>
     </div>
   );
@@ -63,14 +69,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onIncrease: (id) => {
-      console.log('ID');
-    }
-
-  }
-
+const mapDispatchToProps = {
+  onIncrease: phoneAddToCart,
+  onDecrease: phoneRemoveFromCart,
+  onDelete: phoneDeleteAllCart
 }
 
 
