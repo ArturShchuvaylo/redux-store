@@ -1,17 +1,19 @@
 import React from "react";
-import './phone-list-item';
-const PhoneListItem = ({ phone }) => {
-    const { title, discription, price, coverImage } = phone;
+import './phone-list-item.css';
+import { Link } from 'react-router-dom'
+
+const PhoneListItem = ({ phone, plusOneItem }) => {
+    const { title, discription, total, imagUrl } = phone;
     return (
         <div className="phone-list-item">
             <div className="phone-cover">
-                <img src={coverImage} alt="cover" />
+                <img src={imagUrl} alt="cover" />
             </div>
             <div className="phone-details">
-                <a href="#" className="phone-title">{title}</a>
+                <Link to="/" className="phone-title">{title}</Link>
                 <div className="phone-author">{discription}</div>
-                <div className="phone-price">${price}</div>
-                <button className="btn btn-info add-to-cart">Add to cart</button>
+                <div className="phone-price">${total}</div>
+                <button onClick={plusOneItem} className="btn btn-info add-to-cart">Add to cart</button>
             </div>
 
         </div>
