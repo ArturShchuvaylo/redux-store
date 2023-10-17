@@ -34,6 +34,18 @@ const phoneDeleteAllCart = (id) => {
         payload: id,
     }
 }
+const sum = (n) => {
+    return {
+        type: 'SUM',
+        payload: n,
+    }
+}
+const getValue = (e) => {
+    return {
+        type: 'GET_VALUE',
+        payload: e,
+    }
+}
 
 const fetchPhones = (dispatch, phonesStoreService) => () => {
     dispatch(phonesRequested());
@@ -50,5 +62,7 @@ export {
     fetchPhones,
     phoneAddToCart,
     phoneRemoveFromCart,
-    phoneDeleteAllCart
+    phoneDeleteAllCart,
+    sum,
+    getValue
 }

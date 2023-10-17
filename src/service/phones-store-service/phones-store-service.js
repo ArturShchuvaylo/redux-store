@@ -14,6 +14,13 @@ export default class PhonesStoreService {
             total: 20000,
             imagUrl: 'https://mcstore.com.ua/image/cache/catalog/MPVA3-1663407386-600x600.jpg'
         },
+        {
+            id: 3,
+            title: 'IPhone',
+            discription: 'Best phone for people...',
+            total: 20000,
+            imagUrl: 'https://mcstore.com.ua/image/cache/catalog/MPVA3-1663407386-600x600.jpg'
+        },
 
     ];
     getPhones() {

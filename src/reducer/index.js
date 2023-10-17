@@ -6,6 +6,8 @@ const initialState = {
     ],
     orderTotal: 0,
     countItems: 0,
+    sum: 0,
+    value: null,
 };
 
 const updateCartItems = (cartItems, item, idx) => {
@@ -29,11 +31,8 @@ const updateCartItems = (cartItems, item, idx) => {
         item,
         ...cartItems.slice(idx + 1),
     ]
-
-
-
-
 }
+
 const updateCartItem = (phone, item = {}, quantity) => {
 
     const { title = phone.title, total = 0, id = phone.id, count = 0 } = item;
@@ -91,11 +90,21 @@ const reducer = (state = initialState, action) => {
 
         case "PHONE_REMOVE_FROM_CART":
             return updateOrder(state, action.payload, -1);
+
         case "PHONE_DELETE_ALL_CART":
             const item = state.cartItems.find(({ id }) => id === action.payload)
             return updateOrder(state, action.payload, -item.count);
+        case 'SUM':
+            return {
+                ...state,
+                sum: state.sum + state.value,
+            }
 
-
+        case 'GET_VALUE':
+            return {
+                ...state,
+                value: action.payload
+            }
 
         default:
             return state;

@@ -2,6 +2,7 @@
   "name": "redux-store",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ArturShchuvaylo.github.io/redux-store",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -11,13 +12,16 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.0",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
